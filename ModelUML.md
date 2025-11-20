@@ -2,7 +2,6 @@
 
 # Brew-Bite Café – Domain Model (Model Layer)
 
-```mermaid
 classDiagram
 direction LR
 
@@ -129,17 +128,18 @@ MenuItem <|-- Pastry
 
 Observable <|.. InventoryManager
 Observable <|.. OrderManager
-Observer <|.. User  %% for example: a barista user observing order changes
+%% User can act as an Observer (e.g., barista watching orders)
+Observer <|.. User
 
 %% ========= ASSOCIATIONS =========
-MenuItem "1" o-- "*" Customization : supports >
-MenuItem "*" o-- "*" Ingredient : uses >
+MenuItem "1" o-- "*" Customization : supports
+MenuItem "*" o-- "*" Ingredient : uses
 
 Order "1" o-- "*" OrderItem
 OrderItem "*" --> "1" MenuItem
-Order "*" --> "1" User : createdBy >
+Order "*" --> "1" User : createdBy
 
-Inventory "1" o-- "*" Ingredient : tracks >
+Inventory "1" o-- "*" Ingredient : tracks
 InventoryManager "1" --> "1" Inventory
 MenuManager "1" --> "*" MenuItem
 OrderManager "1" --> "*" Order
