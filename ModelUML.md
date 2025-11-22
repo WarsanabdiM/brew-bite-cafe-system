@@ -19,11 +19,6 @@ class Beverage {
   - caffeineMg : int
 }
 
-class Pastry {
-  - canBeWarmed : boolean
-  - calories : int
-}
-
 class Size {
   <<enumeration>>
   SMALL
@@ -117,7 +112,6 @@ class OrderManager {
 }
 
 MenuItem <|-- Beverage
-MenuItem <|-- Pastry
 
 Observable <|.. InventoryManager
 Observable <|.. OrderManager
