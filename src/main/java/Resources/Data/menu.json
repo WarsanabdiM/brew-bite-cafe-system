@@ -1,118 +1,144 @@
-{
-    "beverages": [
-      {
-        "id": "bev_001",
-        "name": "Latte",
-        "basePrice": 4.50,
-        "ingredients": {
-          "Espresso Beans": 18,
-          "Milk": 250
-        }
-      },
-      {
-        "id": "bev_002",
-        "name": "Cappuccino",
-        "basePrice": 4.50,
-        "ingredients": {
-          "Espresso Beans": 18,
-          "Milk": 200
-        }
-      },
-      {
-        "id": "bev_003",
-        "name": "Espresso",
-        "basePrice": 3.00,
-        "ingredients": {
-          "Espresso Beans": 18
-        }
-      },
-      {
-        "id": "bev_004",
-        "name": "Green Tea",
-        "basePrice": 3.50,
-        "ingredients": {
-          "Green Tea Leaves": 5,
-          "Water": 300
-        }
-      },
-      {
-        "id": "bev_005",
-        "name": "Black Tea",
-        "basePrice": 3.50,
-        "ingredients": {
-          "Black Tea Leaves": 5,
-          "Water": 300
-        }
-      },
-      {
-        "id": "bev_006",
-        "name": "Herbal Tea",
-        "basePrice": 3.75,
-        "ingredients": {
-          "Herbal Tea Mix": 6,
-          "Water": 300
-        }
-      }
-    ],
-    "pastries": [
-      {
-        "id": "pas_001",
-        "name": "Butter Croissant",
-        "price": 3.00,
-        "ingredients": {
-          "Flour": 50,
-          "Butter": 30
-        }
-      },
-      {
-        "id": "pas_002",
-        "name": "Chocolate Croissant",
-        "price": 3.50,
-        "ingredients": {
-          "Flour": 50,
-          "Butter": 30,
-          "Chocolate Chips": 15
-        }
-      },
-      {
-        "id": "pas_003",
-        "name": "Blueberry Muffin",
-        "price": 2.75,
-        "ingredients": {
-          "Flour": 40,
-          "Sugar": 10,
-          "Blueberries": 15
-        }
-      },
-      {
-        "id": "pas_004",
-        "name": "Chocolate Chip Muffin",
-        "price": 2.75,
-        "ingredients": {
-          "Flour": 40,
-          "Sugar": 10,
-          "Chocolate Chips": 20
-        }
-      },
-      {
-        "id": "pas_005",
-        "name": "Chocolate Chip Cookie",
-        "price": 2.00,
-        "ingredients": {
-          "Flour": 30,
-          "Sugar": 15,
-          "Chocolate Chips": 20
-        }
-      },
-      {
-        "id": "pas_006",
-        "name": "Oatmeal Raisin Cookie",
-        "price": 2.00,
-        "ingredients": {
-          "Flour": 30,
-          "Sugar": 10,
-          "Oats": 20
-        }
-      }
-    ]
+[
+  {
+    "type": "BEVERAGE",
+    "id": "bev_001",
+    "name": "Latte",
+    "basePrice": 4.50,
+    "iced": false,
+    "caffeineMg": 75,
+    "ingredients": {
+      "Espresso Beans": 18,
+      "Milk": 250
+    }
+  },
+  {
+    "type": "BEVERAGE",
+    "id": "bev_002",
+    "name": "Cappuccino",
+    "basePrice": 4.50,
+    "iced": false,
+    "caffeineMg": 75,
+    "ingredients": {
+      "Espresso Beans": 18,
+      "Milk": 200
+    }
+  },
+  {
+    "type": "BEVERAGE",
+    "id": "bev_003",
+    "name": "Espresso",
+    "basePrice": 3.00,
+    "iced": false,
+    "caffeineMg": 75,
+    "ingredients": {
+      "Espresso Beans": 18
+    }
+  },
+  {
+    "type": "BEVERAGE",
+    "id": "bev_004",
+    "name": "Green Tea",
+    "basePrice": 3.50,
+    "iced": false,
+    "caffeineMg": 30,
+    "ingredients": {
+      "Green Tea Leaves": 5,
+      "Water": 300
+    }
+  },
+  {
+    "type": "BEVERAGE",
+    "id": "bev_005",
+    "name": "Black Tea",
+    "basePrice": 3.50,
+    "iced": false,
+    "caffeineMg": 40,
+    "ingredients": {
+      "Black Tea Leaves": 5,
+      "Water": 300
+    }
+  },
+  {
+    "type": "BEVERAGE",
+    "id": "bev_006",
+    "name": "Herbal Tea",
+    "basePrice": 3.75,
+    "iced": false,
+    "caffeineMg": 0,
+    "ingredients": {
+      "Herbal Tea Mix": 6,
+      "Water": 300
+    }
+  },
+  {
+    "type": "PASTRY",
+    "id": "pas_001",
+    "name": "Butter Croissant",
+    "basePrice": 3.00,
+    "heated": true,
+    "ingredients": {
+      "Flour": 50,
+      "Butter": 30
+    }
+  },
+  {
+    "type": "PASTRY",
+    "id": "pas_002",
+    "name": "Chocolate Croissant",
+    "basePrice": 3.50,
+    "heated": true,
+    "ingredients": {
+      "Flour": 50,
+      "Butter": 30,
+      "Chocolate Chips": 15
+    }
+  },
+  {
+    "type": "PASTRY",
+    "id": "pas_003",
+    "name": "Blueberry Muffin",
+    "basePrice": 2.75,
+    "heated": false,
+    "ingredients": {
+      "Flour": 40,
+      "Sugar": 10,
+      "Blueberries": 15
+    }
+  },
+  {
+    "type": "PASTRY",
+    "id": "pas_004",
+    "name": "Chocolate Chip Muffin",
+    "basePrice": 2.75,
+    "heated": false,
+    "ingredients": {
+      "Flour": 40,
+      "Sugar": 10,
+      "Chocolate Chips": 20
+    }
+  },
+  {
+    "type": "PASTRY",
+    "id": "pas_005",
+    "name": "Chocolate Chip Cookie",
+    "basePrice": 2.00,
+    "heated": true,
+    "ingredients": {
+      "Flour": 30,
+      "Sugar": 15,
+      "Chocolate Chips": 20
+    }
+  },
+  {
+    "type": "PASTRY",
+    "id": "pas_006",
+    "name": "Oatmeal Raisin Cookie",
+    "basePrice": 2.00,
+    "heated": true,
+    "ingredients": {
+      "Flour": 30,
+      "Sugar": 10,
+      "Oats": 20
+    }
   }
+]

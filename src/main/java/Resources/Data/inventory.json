@@ -1,62 +1,74 @@
 [
-    {
-      "name": "Espresso Beans",
-      "quantity": 5000,
-      "unit": "grams"
-    },
-    {
-      "name": "Milk",
-      "quantity": 10000,
-      "unit": "ml"
-    },
-    {
-      "name": "Sugar",
-      "quantity": 2000,
-      "unit": "grams"
-    },
-    {
-      "name": "Flour",
-      "quantity": 5000,
-      "unit": "grams"
-    },
-    {
-      "name": "Butter",
-      "quantity": 3000,
-      "unit": "grams"
-    },
-    {
-      "name": "Chocolate Chips",
-      "quantity": 1500,
-      "unit": "grams"
-    },
-    {
-      "name": "Green Tea Leaves",
-      "quantity": 1000,
-      "unit": "grams"
-    },
-    {
-      "name": "Black Tea Leaves",
-      "quantity": 1000,
-      "unit": "grams"
-    },
-    {
-      "name": "Herbal Tea Mix",
-      "quantity": 1000,
-      "unit": "grams"
-    },
-    {
-      "name": "Water",
-      "quantity": 100000,
-      "unit": "ml"
-    },
-    {
-      "name": "Blueberries",
-      "quantity": 500,
-      "unit": "grams"
-    },
-    {
-      "name": "Oats",
-      "quantity": 1000,
-      "unit": "grams"
-    }
-  ]
+  {
+    "id": "ing-1",
+    "name": "Espresso Beans",
+    "quantity": 5000,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-2",
+    "name": "Milk",
+    "quantity": 10000,
+    "unit": "ml"
+  },
+  {
+    "id": "ing-3",
+    "name": "Water",
+    "quantity": 50000,
+    "unit": "ml"
+  },
+  {
+    "id": "ing-4",
+    "name": "Green Tea Leaves",
+    "quantity": 1000,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-5",
+    "name": "Black Tea Leaves",
+    "quantity": 1000,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-6",
+    "name": "Herbal Tea Mix",
+    "quantity": 1000,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-7",
+    "name": "Flour",
+    "quantity": 5000,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-8",
+    "name": "Butter",
+    "quantity": 3000,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-9",
+    "name": "Sugar",
+    "quantity": 2000,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-10",
+    "name": "Chocolate Chips",
+    "quantity": 1500,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-11",
+    "name": "Blueberries",
+    "quantity": 500,
+    "unit": "grams"
+  },
+  {
+    "id": "ing-12",
+    "name": "Oats",
+    "quantity": 1000,
+    "unit": "grams"
+  }
+]

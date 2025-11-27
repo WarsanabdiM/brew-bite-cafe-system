@@ -1,33 +1,74 @@
 package app.persistence;
 
-import com.google.gson.Gson; 
+import app.model.*;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsonLoader {
-    
+
     private static final String DATA_DIR = "src/main/resources/data/";
-
     
-    public static <T> T load(String filename, Type typeOfT) {
-        try {
-            
-            if (!Files.exists(Paths.get(DATA_DIR + filename))) {
-                System.err.println("Error: File not found " + filename);
-                return null;
-            }
+    private static final Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
 
-            Gson gson = new Gson();
-            try (FileReader reader = new FileReader(DATA_DIR + filename)) {
-                return gson.fromJson(reader, typeOfT);
+
+    public static List<User> loadUsers() {
+        try (FileReader reader = new FileReader(DATA_DIR + "users.json")) {
+            Type listType = new TypeToken<ArrayList<User>>(){}.getType();
+            return gson.fromJson(reader, listType);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+
+    public static Inventory loadInventory() {
+        Inventory inventory = new Inventory();
+        try (FileReader reader = new FileReader(DATA_DIR + "inventory.json")) {
+            Type listType = new TypeToken<ArrayList<Ingredient>>(){}.getType();
+            List<Ingredient> ingredients = gson.fromJson(reader, listType);
+            
+            for (Ingredient ing : ingredients) {
+
+                inventory.addStock(ing, ing.getQuantity()); 
             }
         } catch (IOException e) {
-            System.err.println("Failed to load data from " + filename);
             e.printStackTrace();
-            return null;
         }
+        return inventory;
+    }
+
+
+    public static List<MenuItem> loadMenu() {
+        List<MenuItem> menu = new ArrayList<>();
+        try (FileReader reader = new FileReader(DATA_DIR + "menu.json")) {
+            JsonArray array = JsonParser.parseReader(reader).getAsJsonArray();
+            
+            for (JsonElement element : array) {
+                JsonObject obj = element.getAsJsonObject();
+                String type = obj.get("type").getAsString(); 
+
+                if ("BEVERAGE".equalsIgnoreCase(type)) {
+                    menu.add(gson.fromJson(obj, Beverage.class));
+                } else if ("PASTRY".equalsIgnoreCase(type)) {
+                    menu.add(gson.fromJson(obj, Pastry.class));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return menu;
+    }
+
+
+    public static List<Order> loadOrders() {
+        return new ArrayList<>(); 
     }
 }
