@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" 
+            stylesheets="@../styles.css"
+            prefHeight="600.0" prefWidth="900.0">
+
+    <top>
+        <HBox styleClass="header-box" spacing="20" alignment="CENTER_LEFT">
+            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+            <Label text="Brew &amp; Bite Menu" styleClass="label-header"/>
+            <Region HBox.hgrow="ALWAYS" /> <Button text="Log Out" styleClass="button-secondary"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+            <FlowPane fx:id="menuContainer" hgap="20" vgap="20">
+                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                <Label text="Loading Menu..." />
+            </FlowPane>
+        </ScrollPane>
+    </center>
+
+    <right>
+        <VBox spacing="10" style="-fx-background-color: white; -fx-border-color: #D7CCC8; -fx-border-width: 0 0 0 1;">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <Label text="Your Order" styleClass="label-subheader"/>
+            
+            <ListView fx:id="orderListView" VBox.vgrow="ALWAYS"/>
+            
+            <HBox spacing="10">
+                <Label text="Total:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="totalPriceLabel" text="$0.00"/>
+            </HBox>
+
+            <Button text="Clear Order" fx:id="btnClear" maxWidth="Infinity" styleClass="button-secondary"/>
+            <Button text="Place Order" fx:id="btnPlaceOrder" maxWidth="Infinity" styleClass="button-primary"/>
+        </VBox>
+    </right>
+</BorderPane>
