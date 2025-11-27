@@ -1,6 +1,6 @@
 package app.persistence;
 
-import com.google.gson.Gson; // Or Jackson, whichever you picked
+import com.google.gson.Gson; 
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
