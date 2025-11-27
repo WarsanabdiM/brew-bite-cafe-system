@@ -1,0 +1,70 @@
+[
+    {
+      "id": "ORD-1001",
+      "createdAt": "2023-10-27T08:30:00",
+      "status": "COMPLETED",
+      "createdBy": {
+        "id": "u3",
+        "name": "Charlie Customer",
+        "role": "CUSTOMER"
+      },
+      "items": [
+        {
+          "quantity": 1,
+          "size": "MEDIUM",
+          "menuItem": {
+            "type": "BEVERAGE",
+            "id": "bev_001",
+            "name": "Latte",
+            "basePrice": 4.50,
+            "iced": false,
+            "caffeineMg": 75
+          },
+          "customizations": [
+            {
+              "id": "cust-1",
+              "name": "Extra Foam",
+              "priceAdjustment": 0.50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ORD-1002",
+      "createdAt": "2023-10-27T09:15:00",
+      "status": "NEW",
+      "createdBy": {
+        "id": "u3",
+        "name": "Charlie Customer",
+        "role": "CUSTOMER"
+      },
+      "items": [
+        {
+          "quantity": 2,
+          "size": "SMALL",
+          "menuItem": {
+            "type": "BEVERAGE",
+            "id": "bev_003",
+            "name": "Espresso",
+            "basePrice": 3.00,
+            "iced": false,
+            "caffeineMg": 75
+          },
+          "customizations": []
+        },
+        {
+          "quantity": 1,
+          "size": "SMALL",
+          "menuItem": {
+            "type": "PASTRY",
+            "id": "pas_001",
+            "name": "Butter Croissant",
+            "basePrice": 3.00,
+            "heated": true
+          },
+          "customizations": []
+        }
+      ]
+    }
+  ]

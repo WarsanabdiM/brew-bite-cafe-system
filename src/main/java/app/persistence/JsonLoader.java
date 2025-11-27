@@ -11,10 +11,10 @@ public class JsonLoader {
     
     private static final String DATA_DIR = "src/main/resources/data/";
 
-    // Generic method to load any class from a JSON file
+    
     public static <T> T load(String filename, Type typeOfT) {
         try {
-            // Check if file exists
+            
             if (!Files.exists(Paths.get(DATA_DIR + filename))) {
                 System.err.println("Error: File not found " + filename);
                 return null;

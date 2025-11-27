@@ -1,15 +1,15 @@
-/* Global Background and Font */
+
 .root {
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 14px;
-    -fx-background-color: #F4F1EA; /* Cream background */
+    -fx-background-color: #F4F1EA; 
 }
 
-/* Headers */
+
 .label-header {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: #3E2723; /* Dark Coffee Bean */
+    -fx-text-fill: #3E2723;
 }
 
 .label-subheader {
@@ -18,9 +18,9 @@
     -fx-text-fill: #5D4037;
 }
 
-/* Primary Buttons (Place Order, Login) */
+
 .button-primary {
-    -fx-background-color: #795548; /* Brown */
+    -fx-background-color: #795548; 
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-padding: 10 20 10 20;
@@ -29,12 +29,12 @@
 }
 
 .button-primary:hover {
-    -fx-background-color: #5D4037; /* Darker Brown */
+    -fx-background-color: #5D4037;
 }
 
-/* Secondary Buttons (Clear, Back) */
+
 .button-secondary {
-    -fx-background-color: #D7CCC8; /* Light Mocha */
+    -fx-background-color: #D7CCC8; 
     -fx-text-fill: #3E2723;
     -fx-padding: 10 20 10 20;
     -fx-background-radius: 5;
@@ -45,14 +45,14 @@
     -fx-background-color: #BCAAA4;
 }
 
-/* Success/Action Buttons (Complete Order) */
+
 .button-success {
-    -fx-background-color: #2E7D32; /* Green */
+    -fx-background-color: #2E7D32; 
     -fx-text-fill: white;
     -fx-background-radius: 5;
 }
 
-/* Order Queue Table Styling */
+
 .table-view {
     -fx-base: #EFEBE9;
     -fx-control-inner-background: #EFEBE9;
