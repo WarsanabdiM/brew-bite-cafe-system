@@ -1,0 +1,13 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/zakariagooni/Library/Java/JavaFX/javafx-sdk-21.0.1/lib/javafx-swt.jar",
+        "/Users/zakariagooni/Library/Java/JavaFX/javafx-sdk-21.0.1/lib/javafx.base.jar",
+        "/Users/zakariagooni/Library/Java/JavaFX/javafx-sdk-21.0.1/lib/javafx.controls.jar",
+        "/Users/zakariagooni/Library/Java/JavaFX/javafx-sdk-21.0.1/lib/javafx.fxml.jar",
+        "/Users/zakariagooni/Library/Java/JavaFX/javafx-sdk-21.0.1/lib/javafx.graphics.jar",
+        "/Users/zakariagooni/Library/Java/JavaFX/javafx-sdk-21.0.1/lib/javafx.media.jar",
+        "/Users/zakariagooni/Library/Java/JavaFX/javafx-sdk-21.0.1/lib/javafx.swing.jar",
+        "/Users/zakariagooni/Library/Java/JavaFX/javafx-sdk-21.0.1/lib/javafx.web.jar"
+    ]
+}
