@@ -1,3 +1,4 @@
+
 package app.model;
 
 import java.util.List;
@@ -28,3 +29,4 @@ public class Beverage extends MenuItem {
         return total;
     }
 }
+

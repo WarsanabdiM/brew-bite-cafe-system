@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@../styles.css" prefHeight="600.0" prefWidth="900.0">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+            <Label text="Manager: Menu Catalog" styleClass="label-header"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnGoToInventory" text="Switch to Inventory" styleClass="button-secondary"/>
+            <Button fx:id="btnLogout" text="Log Out" styleClass="button-secondary"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="10" prefWidth="250">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <Label text="Menu Items" styleClass="label-subheader"/>
+            <ListView fx:id="menuListView" VBox.vgrow="ALWAYS"/>
+            <Button fx:id="btnDeleteItem" text="Delete Selected" maxWidth="Infinity" style="-fx-background-color: #D32F2F; -fx-text-fill: white;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #D7CCC8; -fx-border-width: 0 0 0 1;">
+            <Label text="Edit / Add Item" styleClass="label-subheader"/>
+            
+            <GridPane vgap="10" hgap="10">
+                <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="txtName" promptText="e.g. Latte" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Price ($):" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="txtPrice" promptText="e.g. 4.50" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                
+                <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="txtType" promptText="Beverage or Pastry" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </GridPane>
+
+            <Label text="Ingredients (JSON format for now):"/>
+            <TextArea fx:id="txtIngredients" prefRowCount="5" promptText='{"Milk": 200, "Espresso Beans": 18}'/>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="btnClearForm" text="Clear Form" styleClass="button-secondary"/>
+                <Button fx:id="btnSaveItem" text="Save Item" styleClass="button-primary"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

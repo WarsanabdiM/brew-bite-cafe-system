@@ -1,0 +1,62 @@
+[
+    {
+      "name": "Espresso Beans",
+      "quantity": 5000,
+      "unit": "grams"
+    },
+    {
+      "name": "Milk",
+      "quantity": 10000,
+      "unit": "ml"
+    },
+    {
+      "name": "Sugar",
+      "quantity": 2000,
+      "unit": "grams"
+    },
+    {
+      "name": "Flour",
+      "quantity": 5000,
+      "unit": "grams"
+    },
+    {
+      "name": "Butter",
+      "quantity": 3000,
+      "unit": "grams"
+    },
+    {
+      "name": "Chocolate Chips",
+      "quantity": 1500,
+      "unit": "grams"
+    },
+    {
+      "name": "Green Tea Leaves",
+      "quantity": 1000,
+      "unit": "grams"
+    },
+    {
+      "name": "Black Tea Leaves",
+      "quantity": 1000,
+      "unit": "grams"
+    },
+    {
+      "name": "Herbal Tea Mix",
+      "quantity": 1000,
+      "unit": "grams"
+    },
+    {
+      "name": "Water",
+      "quantity": 100000,
+      "unit": "ml"
+    },
+    {
+      "name": "Blueberries",
+      "quantity": 500,
+      "unit": "grams"
+    },
+    {
+      "name": "Oats",
+      "quantity": 1000,
+      "unit": "grams"
+    }
+  ]
