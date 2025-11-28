@@ -1,50 +1,63 @@
 package app.controller;
 
+import app.model.User;
+import app.persistence.JsonLoader;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.util.List;
 
 public class LoginController {
 
     private MainController mainController;
+    private List<User> users;
 
     @FXML
-    private TextField usernameField;    // optional, 
+    private TextField usernameField;
 
     @FXML
-    private ChoiceBox<String> roleChoiceBox;
-
-    @FXML
-    private Button loginButton;
+    private PasswordField passwordField;
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
-    }
-
-    @FXML
-    private void initialize() {
-        if (roleChoiceBox != null) {
-            roleChoiceBox.getItems().addAll("Customer", "Barista", "Manager");
-            roleChoiceBox.setValue("Customer");
-        }
+        this.users = JsonLoader.loadUsers("/data/users.json");
     }
 
     @FXML
     private void handleLogin() {
-        if (mainController == null || roleChoiceBox == null) {
+        if (mainController == null || users == null
+                || usernameField == null || passwordField == null) {
             return;
         }
 
-        String role = roleChoiceBox.getValue();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-        // TODO: later add real validation using User model.
-        switch (role) {
-            case "Customer" -> mainController.showCustomerScreen();
-            case "Barista" -> mainController.showBaristaScreen();
-            case "Manager" -> mainController.showManagerMenuScreen();
-            default -> mainController.showCustomerScreen();
+        if (username == null || username.isBlank()
+                || password == null || password.isBlank()) {
+            return;
+        }
+
+        User user = users.stream()
+                .filter(u -> username.equals(u.getName())
+                        && password.equals(u.getPassword()))
+                .findFirst()
+                .orElse(null);
+
+        if (user == null) {
+            return;
+        }
+
+        String role = user.getRole();
+        if ("Customer".equalsIgnoreCase(role)) {
+            mainController.showCustomerScreen();
+        } else if ("Barista".equalsIgnoreCase(role)) {
+            mainController.showBaristaScreen();
+        } else if ("Manager".equalsIgnoreCase(role)) {
+            mainController.showManagerMenuScreen();
+        } else {
+            mainController.showCustomerScreen();
         }
     }
 }

@@ -1,11 +1,14 @@
 package app.controller;
 
+import app.factory.BeverageFactory;
+import app.factory.PastryFactory;
 import app.model.Beverage;
 import app.model.Ingredient;
 import app.model.Inventory;
 import app.model.InventoryManager;
 import app.model.MenuItem;
 import app.model.MenuManager;
+import app.model.Pastry;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,24 +18,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Manager screen:
- *  - manages menu items
- *  - manages inventory ingredients.
- *
- 
- *  - MenuItem is abstract
- *  - Beverage extends MenuItem
- *  - Ingredient has (id, name, unit)
- *  - InventoryManager wraps an Inventory with quantities
- */
 public class ManagerController {
 
     private MainController mainController;
     private MenuManager menuManager;
     private InventoryManager inventoryManager;
+
+    private final BeverageFactory beverageFactory = new BeverageFactory();
+    private final PastryFactory pastryFactory = new PastryFactory();
 
     private final ObservableList<MenuItem> menuItems =
             FXCollections.observableArrayList();
@@ -40,46 +36,35 @@ public class ManagerController {
     private final ObservableList<Ingredient> ingredientItems =
             FXCollections.observableArrayList();
 
-    /* ========= MENU UI (manager_menu.fxml) ========= */
-
-    // Table of menu items
     @FXML
-    private TableView<MenuItem> menuTable;      // fx:id="menuTable"
-
-    // Form fields for a new menu item
-    @FXML
-    private TextField menuNameField;            // fx:id="menuNameField"
+    private TableView<MenuItem> menuTable;
 
     @FXML
-    private TextField menuBasePriceField;       // fx:id="menuBasePriceField"
-
-    
-    @FXML
-    private ComboBox<String> menuTypeCombo;     // fx:id="menuTypeCombo"
-
-    
-    @FXML
-    private TextArea ingredientsTextArea;       // fx:id="ingredientsTextArea"
-
-    /* ========= INVENTORY UI (manager_inventory.fxml) ========= */
+    private TextField menuNameField;
 
     @FXML
-    private TableView<Ingredient> inventoryTable;   // fx:id="inventoryTable"
+    private TextField menuBasePriceField;
 
     @FXML
-    private TextField ingredientNameField;          // fx:id="ingredientNameField"
+    private ComboBox<String> menuTypeCombo;
 
     @FXML
-    private TextField ingredientUnitField;          // fx:id="ingredientUnitField"
+    private TextArea ingredientsTextArea;
 
     @FXML
-    private TextField ingredientQtyField;           // fx:id="ingredientQtyField"
+    private TableView<Ingredient> inventoryTable;
 
     @FXML
-    private Button addIngredientButton;             // fx:id="addIngredientButton"
+    private TextField ingredientNameField;
 
+    @FXML
+    private TextField ingredientUnitField;
 
-    /* ========= Wiring from MainController ========= */
+    @FXML
+    private TextField ingredientQtyField;
+
+    @FXML
+    private Button addIngredientButton;
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
@@ -99,11 +84,8 @@ public class ManagerController {
         }
     }
 
-    /* ========= JavaFX lifecycle ========= */
-
     @FXML
     private void initialize() {
-        
         if (menuTable != null) {
             menuTable.setItems(menuItems);
         }
@@ -111,19 +93,15 @@ public class ManagerController {
             inventoryTable.setItems(ingredientItems);
         }
 
-        // Optional type combo
         if (menuTypeCombo != null) {
-            menuTypeCombo.getItems().setAll("Beverage");
+            menuTypeCombo.getItems().setAll("Beverage", "Pastry");
             menuTypeCombo.getSelectionModel().selectFirst();
         }
     }
 
-    /* ========= MENU ACTIONS ========= */
-
     @FXML
     private void handleAddMenuItem() {
         if (menuNameField == null || menuBasePriceField == null) {
-        
             return;
         }
 
@@ -139,23 +117,31 @@ public class ManagerController {
         try {
             basePrice = Double.parseDouble(priceText);
         } catch (NumberFormatException e) {
-            
             return;
         }
 
-        
         String id = "M" + (menuItems.size() + 1);
+        String type = menuTypeCombo != null ? menuTypeCombo.getValue() : "Beverage";
+        Map<String, Integer> recipe = parseIngredientsText();
 
-        
-        MenuItem item = new Beverage(id, name, basePrice, false, 0);
+        MenuItem item;
+        if ("Pastry".equalsIgnoreCase(type)) {
+            boolean canBeWarmed = true;
+            int calories = 300;
+            Pastry template = new Pastry(id, name, basePrice, canBeWarmed, calories, recipe);
+            item = pastryFactory.createFromTemplate(template);
+        } else {
+            boolean iced = false;
+            int caffeineMg = 80;
+            Beverage template = new Beverage(id, name, basePrice, iced, caffeineMg, recipe);
+            item = beverageFactory.createFromTemplate(template);
+        }
 
-        // persist in the in-memory menu
         if (menuManager != null) {
             menuManager.addMenuItem(item);
         }
         menuItems.add(item);
 
-        // clear form
         menuNameField.clear();
         menuBasePriceField.clear();
         if (ingredientsTextArea != null) {
@@ -163,7 +149,33 @@ public class ManagerController {
         }
     }
 
-    /* ========= INVENTORY ACTIONS ========= */
+    private Map<String, Integer> parseIngredientsText() {
+        Map<String, Integer> map = new HashMap<>();
+        if (ingredientsTextArea == null) {
+            return map;
+        }
+        String text = ingredientsTextArea.getText();
+        if (text == null || text.isBlank()) {
+            return map;
+        }
+        String[] lines = text.split("\\r?\\n");
+        for (String line : lines) {
+            String trimmed = line.trim();
+            if (trimmed.isEmpty()) continue;
+            String[] parts = trimmed.split(":");
+            if (parts.length != 2) continue;
+            String name = parts[0].trim();
+            String qtyStr = parts[1].trim();
+            try {
+                int qty = Integer.parseInt(qtyStr);
+                if (qty > 0) {
+                    map.put(name, qty);
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return map;
+    }
 
     @FXML
     private void handleAddIngredient() {
@@ -171,7 +183,6 @@ public class ManagerController {
                 || ingredientUnitField == null
                 || ingredientQtyField == null
                 || inventoryManager == null) {
-            
             return;
         }
 
@@ -196,19 +207,12 @@ public class ManagerController {
             return;
         }
 
-        // Generate a simple ingredient ID
         String id = "I" + (ingredientItems.size() + 1);
-
-        // Ingredient constructor is (id, name, unit)
         Ingredient ingredient = new Ingredient(id, name, unit);
 
-        // Add to inventory with the starting quantity
         inventoryManager.restock(ingredient, quantity);
-
-        // Refresh the list from the Inventory snapshot
         refreshInventoryList();
 
-        // clear fields
         ingredientNameField.clear();
         ingredientUnitField.clear();
         ingredientQtyField.clear();
@@ -219,8 +223,6 @@ public class ManagerController {
         Map<Ingredient, Integer> snapshot = inv.getSnapshot();
         ingredientItems.setAll(snapshot.keySet());
     }
-
-    /* ========= NAVIGATION BUTTONS ========= */
 
     @FXML
     private void handleGoToInventory() {

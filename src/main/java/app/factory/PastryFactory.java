@@ -2,7 +2,6 @@ package app.factory;
 
 import app.model.Pastry;
 
-
 public class PastryFactory {
 
     public Pastry createFromTemplate(Pastry template) {

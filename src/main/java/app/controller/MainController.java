@@ -1,87 +1,70 @@
 package app.controller;
 
+import app.model.Inventory;
 import app.model.InventoryManager;
 import app.model.MenuManager;
 import app.model.OrderManager;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
+import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
-/**
- * Central navigation controller for Brew Bite.
- * Holds the primary Stage and shared managers, and loads all screens.
- */
 public class MainController {
 
-    private final Stage primaryStage;
-    private final InventoryManager inventoryManager;
-    private final MenuManager menuManager;
-    private final OrderManager orderManager;
+    @FXML
+    private BorderPane root;
 
-    public MainController(Stage primaryStage,
-                          InventoryManager inventoryManager,
-                          MenuManager menuManager,
-                          OrderManager orderManager) {
-        this.primaryStage = primaryStage;
-        this.inventoryManager = inventoryManager;
-        this.menuManager = menuManager;
-        this.orderManager = orderManager;
+    private final MenuManager menuManager = new MenuManager();
+    private final OrderManager orderManager = new OrderManager();
+    private final InventoryManager inventoryManager = new InventoryManager(new Inventory());
+
+    @FXML
+    public void initialize() {
+        showLoginScreen();
     }
 
-    public void showLoginScreen() {
-        loadScreen("/fxml/login.fxml", "Brew Bite - Login");
-    }
-
-    public void showCustomerScreen() {
-        loadScreen("/fxml/customer_view.fxml", "Brew Bite - Customer");
-    }
-
-    public void showBaristaScreen() {
-        loadScreen("/fxml/barista_view.fxml", "Brew Bite - Barista");
-    }
-
-    public void showManagerMenuScreen() {
-        loadScreen("/fxml/manager_menu.fxml", "Brew Bite - Manager Menu");
-    }
-
-    public void showManagerInventoryScreen() {
-        loadScreen("/fxml/manager_inventory.fxml", "Brew Bite - Manager Inventory");
-    }
-
-    
-    private void loadScreen(String fxmlPath, String title) {
+    private void loadScreen(String fxmlPath, Object controller) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
+            Parent view = loader.load();
+            Object loadedController = loader.getController();
 
-            Object controller = loader.getController();
-
-            // Inject dependencies into each controller type
-            if (controller instanceof LoginController loginController) {
-                loginController.setMainController(this);
-            } else if (controller instanceof CustomerController customerController) {
-                customerController.setMainController(this);
-                customerController.setMenuManager(menuManager);
-                customerController.setOrderManager(orderManager);
-            } else if (controller instanceof BaristaController baristaController) {
-                baristaController.setMainController(this);
-                baristaController.setOrderManager(orderManager);
-                baristaController.setInventoryManager(inventoryManager);
-            } else if (controller instanceof ManagerController managerController) {
-                managerController.setMainController(this);
-                managerController.setMenuManager(menuManager);
-                managerController.setInventoryManager(inventoryManager);
+            if (loadedController instanceof LoginController lc) {
+                lc.setMainController(this);
+            } else if (loadedController instanceof CustomerController cc) {
+                cc.setMainController(this);
+                cc.setMenuManager(menuManager);
+                cc.setOrderManager(orderManager);
+            } else if (loadedController instanceof BaristaController bc) {
+                bc.setMainController(this);
+                bc.setOrderManager(orderManager);
+                bc.setInventoryManager(inventoryManager);
+            } else if (loadedController instanceof ManagerController mc) {
+                mc.setMainController(this);
+                mc.setMenuManager(menuManager);
+                mc.setInventoryManager(inventoryManager);
             }
 
-            primaryStage.setTitle(title);
-            primaryStage.setScene(new Scene(root));
-            primaryStage.show();
-
+            root.setCenter(view);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showLoginScreen() {
+        loadScreen("/app/view/LoginView.fxml", new LoginController());
+    }
+
+    public void showCustomerScreen() {
+        loadScreen("/app/view/CustomerView.fxml", new CustomerController());
+    }
+
+    public void showBaristaScreen() {
+        loadScreen("/app/view/BaristaView.fxml", new BaristaController());
+    }
+
+    public void showManagerMenuScreen() {
+        loadScreen("/app/view/ManagerMenuView.fxml", new ManagerController());
     }
 }

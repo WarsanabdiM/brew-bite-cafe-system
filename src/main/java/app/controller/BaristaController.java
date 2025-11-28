@@ -1,7 +1,9 @@
 package app.controller;
 
 import app.model.InventoryManager;
+import app.model.MenuItem;
 import app.model.Order;
+import app.model.OrderItem;
 import app.model.OrderManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,11 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 
-/**
- * Barista screen:
- * - shows pending orders
- * - allows marking them as prepared.
- */
 public class BaristaController {
 
     private MainController mainController;
@@ -39,6 +36,7 @@ public class BaristaController {
 
     public void setOrderManager(OrderManager orderManager) {
         this.orderManager = orderManager;
+        refreshOrders();
     }
 
     public void setInventoryManager(InventoryManager inventoryManager) {
@@ -50,11 +48,13 @@ public class BaristaController {
         if (ordersTable != null) {
             ordersTable.setItems(orders);
         }
+        refreshOrders();
+    }
 
-        // TODO: When OrderManager API exists, load active orders:
-        // if (orderManager != null) {
-        //     orders.setAll(orderManager.getActiveOrders());
-        // }
+    private void refreshOrders() {
+        if (orderManager != null) {
+            orders.setAll(orderManager.getActiveOrders());
+        }
     }
 
     @FXML
@@ -68,13 +68,27 @@ public class BaristaController {
             return;
         }
 
-        // TODO: Use real fields from Order to show details.
-        orderDetailsArea.setText("Order details:\n" + selected.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Order ").append(selected.getId()).append("\n");
+        sb.append("Status: ").append(selected.getStatus()).append("\n\n");
+        sb.append("Items:\n");
+        for (OrderItem item : selected.getItems()) {
+            MenuItem mi = item.getMenuItem();
+            sb.append("- ")
+              .append(mi.getName())
+              .append(" x").append(item.getQuantity())
+              .append(" -> $").append(item.getSubtotal())
+              .append("\n");
+        }
+        sb.append("\nTotal: $").append(selected.getTotal());
+
+        orderDetailsArea.setText(sb.toString());
     }
 
     @FXML
     private void handleMarkPrepared() {
-        if (ordersTable == null || orderDetailsArea == null) {
+        if (ordersTable == null || orderDetailsArea == null
+                || orderManager == null || inventoryManager == null) {
             return;
         }
 
@@ -83,10 +97,17 @@ public class BaristaController {
             return;
         }
 
-        // TODO: Update order status and inventory when model methods exist:
-        // orderManager.markPrepared(selected);
-        // inventoryManager.deductForOrder(selected);
-        orderDetailsArea.appendText("\n\nMarked prepared. (Connect to model later.)");
+        boolean ok = inventoryManager.consumeIngredients(selected);
+        if (!ok) {
+            orderDetailsArea.appendText("\n\nNot enough inventory to prepare this order.");
+            return;
+        }
+
+        orderManager.markPrepared(selected);
+        orderManager.markCompleted(selected);
+
+        orderDetailsArea.appendText("\n\nOrder marked prepared and completed.");
+        refreshOrders();
     }
 
     @FXML
