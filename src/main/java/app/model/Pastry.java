@@ -1,7 +1,4 @@
 package app.model;
-
-import java.util.Objects;
-
 public class Pastry extends MenuItem {
 
     public Pastry(String id, String name, double basePrice) {
