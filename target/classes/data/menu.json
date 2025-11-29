@@ -1,0 +1,26 @@
+[
+  {
+    "type": "BEVERAGE",
+    "id": "B001",
+    "name": "Latte",
+    "basePrice": 4.50,
+    "iced": false,
+    "caffeineMg": 80,
+    "ingredients": {
+      "Milk": 200,
+      "Espresso": 18
+    }
+  },
+  {
+    "type": "PASTRY",
+    "id": "P001",
+    "name": "Croissant",
+    "basePrice": 3.00,
+    "heated": false,
+    "calories": 280,
+    "ingredients": {
+      "Butter": 20,
+      "Flour": 50
+    }
+  }
+]

@@ -1,0 +1,6 @@
+[
+  { "id": "I001", "name": "Milk", "unit": "ml", "quantity": 10000 },
+  { "id": "I002", "name": "Espresso", "unit": "g", "quantity": 5000 },
+  { "id": "I003", "name": "Butter", "unit": "g", "quantity": 2000 },
+  { "id": "I004", "name": "Flour", "unit": "g", "quantity": 5000 }
+]

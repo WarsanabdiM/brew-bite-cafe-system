@@ -21,7 +21,7 @@ public class LoginController {
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
-        this.users = JsonLoader.loadUsers("/data/users.json");
+        this.users = JsonLoader.loadUsers();
     }
 
     @FXML

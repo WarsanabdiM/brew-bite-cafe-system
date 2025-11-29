@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="app.controller.ManagerController">
+
+    <top>
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <padding><Insets top="10" left="10" bottom="10" right="10"/></padding>
+            <Label text="Manager Panel" style="-fx-font-size: 20px;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="10" padding="10">
+            <Label text="Menu Items" style="-fx-font-size: 16px;"/>
+            <TableView fx:id="menuTable" prefHeight="300"/>
+
+            <Label text="Add New Menu Item"/>
+            <TextField fx:id="menuNameField" promptText="Name"/>
+            <TextField fx:id="menuBasePriceField" promptText="Base Price"/>
+            <ComboBox fx:id="menuTypeCombo"/>
+            <TextArea fx:id="ingredientsTextArea" promptText="Ingredient: qty"/>
+            <Button text="Add Item" onAction="#handleAddMenuItem"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10" padding="10">
+            <Label text="Inventory" style="-fx-font-size: 16px;"/>
+            <TableView fx:id="inventoryTable" prefHeight="300"/>
+
+            <Label text="Add Ingredient"/>
+            <TextField fx:id="ingredientNameField" promptText="Name"/>
+            <TextField fx:id="ingredientUnitField" promptText="Unit"/>
+            <TextField fx:id="ingredientQtyField" promptText="Quantity"/>
+            <Button fx:id="addIngredientButton"
+                    text="Add Ingredient"
+                    onAction="#handleAddIngredient"/>
+        </VBox>
+    </center>
+</BorderPane>

@@ -227,7 +227,8 @@ public class ManagerController {
     @FXML
     private void handleGoToInventory() {
         if (mainController != null) {
-            mainController.showManagerInventoryScreen();
+            mainController.showManagerMenuScreen();
+
         }
     }
 
