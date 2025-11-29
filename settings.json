@@ -1,0 +1,12 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/suhaybjama/.m2/repository/org/openjfx/**/javafx-*.jar"
+    ],
+    "javafx.fxml.preview": {
+        "enabled": true
+    }
+}
+
+
+

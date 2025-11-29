@@ -7,7 +7,8 @@ module brew.bite {
     opens app.controller to javafx.fxml;
     opens app.model to com.google.gson;
 
+    opens fxml to javafx.fxml;
+    
     exports app;
     exports app.controller;
 }
-

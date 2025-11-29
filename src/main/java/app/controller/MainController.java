@@ -56,8 +56,21 @@ public class MainController {
     }
 
     public void showLoginScreen() {
-        loadScreen("/fxml/login.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+            Parent root = loader.load();
+    
+            LoginController controller = loader.getController();
+            controller.setMainController(this);
+    
+            stage.setScene(new Scene(root));
+            stage.show();
+    
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    
 
     public void showCustomerScreen() {
         loadScreen("/fxml/customer.fxml");
