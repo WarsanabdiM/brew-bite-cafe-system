@@ -1,20 +1,4 @@
 [
-    {
-      "id": "u1",
-      "name": "Alice Manager",
-      "role": "MANAGER",
-      "password": "password123"
-    },
-    {
-      "id": "u2",
-      "name": "Bob Barista",
-      "role": "BARISTA",
-      "password": "password123"
-    },
-    {
-      "id": "u3",
-      "name": "Charlie Customer",
-      "role": "CUSTOMER",
-      "password": "password123"
-    }
-  ]
+  { "id": "U001", "name": "John", "role": "Barista", "password": "123" },
+  { "id": "U002", "name": "Sara", "role": "Manager", "password": "123" }
+]

@@ -6,6 +6,8 @@ public abstract class MenuItem {
     private final String id;
     private String name;
     private double basePrice;
+    private String type;
+
 
     protected MenuItem(String id, String name, double basePrice) {
         this.id = id;
