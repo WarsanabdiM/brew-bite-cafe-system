@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -14,7 +13,7 @@
         <Insets top="40" right="40" bottom="40" left="40"/>
     </padding>
 
-    <Label text="Welcome to Brew & Bite" style="-fx-font-size: 24px;"/>
+    <Label text="Welcome to Brew &amp; Bite" />
 
     <VBox spacing="10" alignment="CENTER">
         <TextField fx:id="usernameField" promptText="Username"/>
@@ -24,5 +23,5 @@
 
     <Separator/>
 
-    <Button text="Continue as Customer" onAction="#handleLogin"/>
+    <Button text="Continue as Customer" onAction="#handleCustomerContinue"/>
 </VBox>

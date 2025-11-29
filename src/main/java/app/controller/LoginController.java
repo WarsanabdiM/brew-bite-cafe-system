@@ -60,4 +60,8 @@ public class LoginController {
             mainController.showCustomerScreen();
         }
     }
+
+    public void handleCustomerContinue() {
+        mainController.showCustomerScreen();
+    }
 }

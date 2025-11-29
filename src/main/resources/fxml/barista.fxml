@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
@@ -11,7 +10,7 @@
     <top>
         <HBox spacing="20" alignment="CENTER_LEFT">
             <padding><Insets top="10" left="10" bottom="10" right="10"/></padding>
-            <Label text="Barista Dashboard" style="-fx-font-size: 20px;"/>
+            <Label text="Barista Dashboard" style="-fx-font-size:20px;"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Button text="Logout" onAction="#handleLogout"/>
         </HBox>
@@ -29,4 +28,5 @@
                     onAction="#handleMarkPrepared"/>
         </VBox>
     </center>
+
 </BorderPane>

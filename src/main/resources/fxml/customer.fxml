@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
@@ -11,7 +10,7 @@
     <top>
         <HBox spacing="20" alignment="CENTER_LEFT">
             <padding><Insets top="10" left="10" bottom="10" right="10"/></padding>
-            <Label text="Customer Menu" style="-fx-font-size: 20px;"/>
+            <Label text="Customer Menu" style="-fx-font-size:20px;"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Button text="Logout" onAction="#handleLogout"/>
         </HBox>
@@ -29,4 +28,5 @@
                     onAction="#handlePlaceOrder"/>
         </VBox>
     </center>
+
 </BorderPane>
