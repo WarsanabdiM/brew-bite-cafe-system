@@ -1,86 +1,48 @@
 package app.controller;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
-import app.model.*;
-import app.model.InventoryManager;
-import app.model.MenuManager;
-import app.model.OrderManager;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.io.IOException;
+import app.model.menu.MenuManager;
+import app.model.order.OrderManager;
+import app.model.ingredient.InventoryManager;
+import app.model.user.User;
 
 public class MainController {
 
-    @FXML
-    private BorderPane root;
+    private final Stage stage;
 
-    private final MenuManager menuManager = new MenuManager();
-    private final OrderManager orderManager = new OrderManager();
-    private final InventoryManager inventoryManager = new InventoryManager(new Inventory());
+    private final MenuManager menuManager;
+    private final OrderManager orderManager;
+    private final InventoryManager inventoryManager;
 
-    private void loadScreen(String fxml) {
+    public MainController(Stage stage,
+                          MenuManager menuManager,
+                          OrderManager orderManager,
+                          InventoryManager inventoryManager) {
+
+        this.stage = stage;
+        this.menuManager = menuManager;
+        this.orderManager = orderManager;
+        this.inventoryManager = inventoryManager;
+    }
+
+    private void loadScreen(String fxml, Object controller) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-            Parent view = loader.load();
-
-            Object controller = loader.getController();
-
-            if (controller instanceof LoginController c)
-                c.setMainController(this);
-
-            if (controller instanceof CustomerController c) {
-                c.setMainController(this);
-                c.setMenuManager(menuManager);
-                c.setOrderManager(orderManager);
-            }
-
-            if (controller instanceof BaristaController c) {
-                c.setMainController(this);
-                c.setOrderManager(orderManager);
-                c.setInventoryManager(inventoryManager);
-            }
-
-            if (controller instanceof ManagerController c) {
-                c.setMainController(this);
-                c.setMenuManager(menuManager);
-                c.setInventoryManager(inventoryManager);
-            }
-
-            root.setCenter(view);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showLoginScreen() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+            loader.setController(controller);
             Parent root = loader.load();
-    
-            LoginController controller = loader.getController();
-            controller.setMainController(this);
-    
-            stage.setScene(new Scene(root));
+
+            Scene scene = new Scene(root, 900, 600);
+            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+
+            stage.setTitle("Brew & Bite Cafe");
+            stage.setScene(scene);
             stage.show();
-    
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-
-    public void showCustomerScreen() {
-        loadScreen("/fxml/customer.fxml");
-    }
-
-    public void showBaristaScreen() {
-        loadScreen("/fxml/barista.fxml");
-    }
-
-    public void showManagerMenuScreen() {
-        loadScreen("/fxml/manager.fxml");
-    }
-}

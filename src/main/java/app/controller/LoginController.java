@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.model.User;
+import app.model.user.User;
 import app.persistence.JsonLoader;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -10,59 +10,39 @@ import java.util.List;
 
 public class LoginController {
 
-    private MainController mainController;
-    private List<User> users;
+    private final MainController main;
+    private final List<User> users = JsonLoader.loadUsers();
 
-    @FXML
-    private TextField usernameField;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
 
-    @FXML
-    private PasswordField passwordField;
-
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
-        this.users = JsonLoader.loadUsers();
+    public LoginController(MainController main) {
+        this.main = main;
     }
 
     @FXML
     private void handleLogin() {
-        if (mainController == null || users == null
-                || usernameField == null || passwordField == null) {
-            return;
-        }
+        String u = usernameField.getText();
+        String p = passwordField.getText();
 
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        if (username == null || username.isBlank()
-                || password == null || password.isBlank()) {
-            return;
-        }
-
-        User user = users.stream()
-                .filter(u -> username.equals(u.getName())
-                        && password.equals(u.getPassword()))
+        User match = users.stream()
+                .filter(x -> x.getName().equalsIgnoreCase(u)
+                          && x.getPassword().equals(p))
                 .findFirst()
                 .orElse(null);
 
-        if (user == null) {
-            return;
-        }
+        if (match == null) return;
 
-        String role = user.getRole();
-        if ("Customer".equalsIgnoreCase(role)) {
-            mainController.showCustomerScreen();
-        } else if ("Barista".equalsIgnoreCase(role)) {
-            mainController.showBaristaScreen();
-        } else if ("Manager".equalsIgnoreCase(role)) {
-            mainController.showManagerMenuScreen();
-        } else {
-            mainController.showCustomerScreen();
+        switch (match.getRole().toLowerCase()) {
+            case "customer" -> main.showCustomer(match);
+            case "barista"  -> main.showBarista(match);
+            case "manager"  -> main.showManager(match);
         }
     }
 
-    public void handleCustomerContinue() {
-        mainController.showCustomerScreen();
+    @FXML
+    private void handleCustomerContinue() {
+        User guest = new User("guest", "Guest", "Customer", "");
+        main.showCustomer(guest);
     }
-    
 }

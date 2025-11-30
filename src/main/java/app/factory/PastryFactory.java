@@ -1,13 +1,35 @@
 package app.factory;
 
-import app.model.Pastry;
+import app.model.item.Pastry;
+import java.util.HashMap;
 
 public class PastryFactory {
 
-    public Pastry createFromTemplate(Pastry template) {
-        if (template == null) {
-            throw new IllegalArgumentException("Template pastry cannot be null");
-        }
-        return template;
+    public Pastry create(String id,
+                         String name,
+                         double basePrice,
+                         boolean canBeWarmed,
+                         int calories,
+                         java.util.Map<String, Integer> recipe) {
+
+        return new Pastry(
+                id,
+                name,
+                basePrice,
+                canBeWarmed,
+                calories,
+                new HashMap<>(recipe)   // deep copy
+        );
+    }
+
+    public Pastry clone(Pastry template) {
+        return new Pastry(
+                template.getId(),
+                template.getName(),
+                template.getBasePrice(),
+                template.canBeWarmed(),
+                template.getCalories(),
+                new HashMap<>(template.getRecipe())
+        );
     }
 }
