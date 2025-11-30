@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="app.controller.CustomerController">
 
     <top>
-        <HBox spacing="20" alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" spacing="20">
             <padding><Insets top="10" left="10" bottom="10" right="10"/></padding>
             <Label text="Customer Menu" style="-fx-font-size:20px;"/>
             <Region HBox.hgrow="ALWAYS"/>
@@ -22,10 +22,8 @@
 
     <center>
         <VBox spacing="10" padding="10">
-            <TextArea fx:id="orderSummaryArea" prefRowCount="20"/>
-            <Button fx:id="placeOrderButton"
-                    text="Place Order"
-                    onAction="#handlePlaceOrder"/>
+            <TextArea fx:id="orderSummary" prefRowCount="18"/>
+            <Button text="Add Item to Order" onAction="#handlePlaceOrder"/>
         </VBox>
     </center>
 

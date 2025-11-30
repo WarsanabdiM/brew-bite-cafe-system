@@ -7,8 +7,8 @@
     "iced": false,
     "caffeineMg": 80,
     "ingredients": {
-      "Milk": 200,
-      "Espresso": 18
+      "I001": 200,
+      "I002": 18
     }
   },
   {
@@ -19,8 +19,8 @@
     "heated": false,
     "calories": 280,
     "ingredients": {
-      "Butter": 20,
-      "Flour": 50
+      "I003": 20,
+      "I004": 50
     }
   }
 ]

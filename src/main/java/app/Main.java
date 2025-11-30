@@ -1,44 +1,53 @@
 package app;
 
+import app.controller.MainController;
+
+import app.model.ingredient.Inventory;
+import app.model.ingredient.InventoryManager;
+
+import app.model.menu.MenuManager;
+import app.model.order.OrderManager;
+
+import app.persistence.JsonLoader;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
-
-import app.controller.LoginController;
-import app.controller.MainController;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
-        Scene scene = new Scene(loader.load(), 800, 600);
+    public void start(Stage stage) {
 
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        var menuItems = JsonLoader.loadMenu();
+        var users = JsonLoader.loadUsers();
+        var inventory = JsonLoader.loadInventory();
+        var existingOrders = JsonLoader.loadOrders();
 
-        stage.setTitle("Brew & Bite Cafe");
-        stage.setScene(scene);
-        stage.show();
+        MenuManager menuManager = new MenuManager();
+        menuItems.forEach(menuManager::addMenuItem);
+
+        InventoryManager inventoryManager = new InventoryManager(inventory);
+        
+        OrderManager orderManager = new OrderManager();
+        existingOrders.forEach(o -> {
+            orderManager.createOrder(o.getCreatedBy());
+        });
+
+        
+        MainController main = new MainController(
+                stage,
+                menuManager,
+                orderManager,
+                inventoryManager
+        );
+
+        
+        main.showLogin();
     }
-
-    @Override
-public void start(Stage stage) throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
-    Parent root = loader.load();
-
-    LoginController controller = loader.getController();
-    
-    MainController main = new MainController(stage);
-    controller.setMainController(main);
-
-    stage.setScene(new Scene(root));
-    stage.show();
-}
-
 
     public static void main(String[] args) {
         launch();
     }
 }
+

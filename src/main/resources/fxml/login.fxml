@@ -5,7 +5,6 @@
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="app.controller.LoginController"
       alignment="CENTER" spacing="20"
       prefWidth="400" prefHeight="500">
 
@@ -13,7 +12,7 @@
         <Insets top="40" right="40" bottom="40" left="40"/>
     </padding>
 
-    <Label text="Welcome to Brew &amp; Bite" />
+    <Label text="Welcome to Brew &amp; Bite" style="-fx-font-size: 22px;"/>
 
     <VBox spacing="10" alignment="CENTER">
         <TextField fx:id="usernameField" promptText="Username"/>
@@ -23,5 +22,6 @@
 
     <Separator/>
 
-    <Button text="Continue as Customer" onAction="#handleCustomerContinue"/>
+    <Button text="Continue as Guest Customer" onAction="#handleCustomerContinue"/>
+
 </VBox>

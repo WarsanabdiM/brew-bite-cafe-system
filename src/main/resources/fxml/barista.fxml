@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="app.controller.BaristaController">
 
     <top>
-        <HBox spacing="20" alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" spacing="20">
             <padding><Insets top="10" left="10" bottom="10" right="10"/></padding>
             <Label text="Barista Dashboard" style="-fx-font-size:20px;"/>
             <Region HBox.hgrow="ALWAYS"/>
@@ -22,10 +22,8 @@
 
     <center>
         <VBox spacing="10" padding="10">
-            <TextArea fx:id="orderDetailsArea" prefRowCount="20"/>
-            <Button fx:id="markPreparedButton"
-                    text="Mark Prepared"
-                    onAction="#handleMarkPrepared"/>
+            <TextArea fx:id="orderDetails" prefRowCount="20"/>
+            <Button text="Prepare Order" onAction="#handlePrepare"/>
         </VBox>
     </center>
 
